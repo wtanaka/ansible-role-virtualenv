@@ -1,0 +1,38 @@
+---
+- name: install python-apt on ansible < 1.6.0 and ubuntu et al
+  sudo: yes
+  raw: >
+    if command -v apt-get; then
+       python -c "import apt" ||
+       (command -v apt-get && apt-get install -y python-apt);
+    fi
+
+- name: install python-pycurl on ansible < 1.6.0 and ubuntu et al
+  sudo: yes
+  raw: >
+    if command -v apt-get; then
+       python -c "import pycurl" ||
+       (command -v apt-get && apt-get install -y python-pycurl);
+    fi
+
+# Update APT configuration
+- name: add universe repository
+  apt_repository: >
+    repo="deb http://archive.ubuntu.com/ubuntu trusty universe"
+    state=present
+  register: universe_result
+  sudo: yes
+
+# Download keys and package lists
+- name: apt-get update
+  apt: update_cache=yes cache_valid_time=0
+  sudo: yes
+  when: universe_result.changed
+
+- name: apt-get update
+  apt: update_cache=true cache_valid_time=3600
+  sudo: yes
+
+- name: install python-virtualenv
+  apt: name=python-virtualenv
+  sudo: yes

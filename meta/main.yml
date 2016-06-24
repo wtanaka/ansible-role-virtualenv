@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Wesley Tanaka
+  description: Install virtualenv on ubuntu
+  company: http://wtanaka.com
+  license: GPLv2
+  min_ansible_version: 1.5.4
+  platforms:
+    - name: Ubuntu
+      versions:
+      - precise
+      - trusty
+      - xenial
+dependencies: []
