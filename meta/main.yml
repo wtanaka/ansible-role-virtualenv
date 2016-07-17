@@ -11,4 +11,6 @@ galaxy_info:
       - precise
       - trusty
       - xenial
+  categories:
+  - development
 dependencies: []
