@@ -152,7 +152,7 @@ galaxy_info:
   #  - squeeze
   #  - stretch
   #  - wheezy
-  categories:
+  galaxy_tags:
   - development
   - python
 dependencies: []
