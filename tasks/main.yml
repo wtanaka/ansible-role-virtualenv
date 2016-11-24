@@ -1,38 +1,15 @@
 ---
-- name: install python-apt on ansible < 1.6.0 and ubuntu et al
-  sudo: yes
-  raw: >
-    if > /dev/null command -v apt-get; then
-       python -c "import apt" ||
-       (> /dev/null command -v apt-get && apt-get install -y python-apt);
-    fi
+- include: compat.yml
 
-- name: install python-pycurl on ansible < 1.6.0 and ubuntu et al
-  sudo: yes
-  raw: >
-    if > /dev/null command -v apt-get; then
-       python -c "import pycurl" ||
-       (> /dev/null command -v apt-get && apt-get install -y python-pycurl);
-    fi
+- include: include_vars.yml
 
-# Update APT configuration
-- name: add universe repository
-  apt_repository: >
-    repo="deb http://archive.ubuntu.com/ubuntu trusty universe"
-    state=present
-  register: universe_result
-  sudo: yes
+#- include: epel.yml
+#  when: ansible_distribution == 'CentOS'
 
-# Download keys and package lists
-- name: apt-get update
-  apt: update_cache=yes cache_valid_time=0
-  sudo: yes
-  when: universe_result.changed
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
 
-- name: apt-get update
-  apt: update_cache=true cache_valid_time=3600
-  sudo: yes
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: install python-virtualenv
-  apt: name=python-virtualenv
-  sudo: yes
+- include: install_package_names.yml
