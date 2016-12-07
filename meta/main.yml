@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Wesley Tanaka
-  description: Install virtualenv on ubuntu
+  description: Install virtualenv
   company: http://wtanaka.com
   license: GPLv2
   min_ansible_version: 1.4.4
