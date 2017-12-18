@@ -8,15 +8,11 @@ machine:
       version:
          2.3.1
 
-dependencies:
-   pre:
-      - sudo apt-get update; sudo apt-get install ansible
-
 test:
    override:
       - >
         wget -qO- bit.ly/ansibletest | env
         ANSIBLE_VERSIONS="1.4.4 1.9.2 2.1.0.0 2.2.1.0"
-        DOCKER_IMAGES="debian:8 centos:7 fedora:20 fedora:24
+        DOCKER_IMAGES="debian:8 centos:7 fedora:24 fedora:26
         ubuntu:12.04 ubuntu:14.04 ubuntu:16.04"
         sh
