@@ -3,7 +3,4 @@
 
 - include: include_vars.yml
 
-- include: Debian.yml
-  when: ansible_os_family == 'Debian'
-
 - include: install_package_names.yml
